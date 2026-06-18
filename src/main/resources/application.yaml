@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: forum
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/forum_db'
+    username: 'postgres'
+    password: '1206'
