@@ -4,7 +4,7 @@ API REST de um fórum simples, desenvolvida em Java com Spring Boot e PostgreSQL
 
 ## 🚀 Tecnologias
 
-- Java 17+
+- Java 21+
 - Spring Boot
 - Spring Data JPA
 - Spring Security + JWT
@@ -13,17 +13,17 @@ API REST de um fórum simples, desenvolvida em Java com Spring Boot e PostgreSQL
 
 ## 📋 Funcionalidades
 
-- [ ] CRUD de Categorias
-- [ ] CRUD de Tópicos (vinculados a uma categoria)
-- [ ] CRUD de Respostas (vinculadas a um tópico)
-- [ ] Cadastro de usuário
-- [ ] Login com autenticação JWT
-- [ ] Tópicos e respostas vinculados ao usuário autenticado
+-  CRUD de Categorias
+-  CRUD de Tópicos (vinculados a uma categoria)
+-  CRUD de Respostas (vinculadas a um tópico)
+-  Cadastro de usuário
+-  Login com autenticação JWT
+-  Tópicos e respostas vinculados ao usuário autenticado
 
 ## ⚙️ Como rodar o projeto localmente
 
 ### Pré-requisitos
-- Java 17+
+- Java 21+
 - Maven
 - PostgreSQL rodando localmente (ou via Docker)
 
