@@ -13,7 +13,6 @@ public class TopicoService {
     private final TopicoRepository topicoRepository;
     private final CategoriaRepository categoriaRepository;
 
-
     public TopicoService(TopicoRepository topicoRepository, CategoriaRepository categoriaRepository) {
         this.topicoRepository = topicoRepository;
         this.categoriaRepository = categoriaRepository;
@@ -57,7 +56,9 @@ public class TopicoService {
     }
 
     public List<Topico> listarTopicosPorCategoria(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoria inválida"));
+        if (!categoriaRepository.existsById(id)) {
+            throw new IllegalArgumentException("Categoria inválida");
+        }
         return topicoRepository.findByCategoria_Id(id);
     }
 
