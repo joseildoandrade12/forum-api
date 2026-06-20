@@ -15,7 +15,7 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public Categoria criarCategoria(Categoria categoria) throws IOException {
+    public Categoria criarCategoria(Categoria categoria) {
         if (categoria.getNome() == null || categoria.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome é um campo obrigatório!");
         }
@@ -25,7 +25,7 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
 
-    public Categoria buscarPorId(Long id) throws IOException {
+    public Categoria buscarPorId(Long id) {
         return categoriaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada, ID inválido!"));
     }
 
