@@ -1,6 +1,8 @@
 package com.joseildoandrade12.forum.controller;
 
+import com.joseildoandrade12.forum.model.Resposta;
 import com.joseildoandrade12.forum.model.Topico;
+import com.joseildoandrade12.forum.service.RespostaService;
 import com.joseildoandrade12.forum.service.TopicoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +13,11 @@ import java.util.List;
 @RestController
 public class TopicoController {
     private final TopicoService topicoService;
+    private final RespostaService respostaService;
 
-    public TopicoController(TopicoService topicoService) {
+    public TopicoController(TopicoService topicoService, RespostaService respostaService) {
         this.topicoService = topicoService;
+        this.respostaService = respostaService;
     }
 
     @GetMapping
@@ -24,6 +28,11 @@ public class TopicoController {
     @GetMapping("/{id}")
     public ResponseEntity<Topico> getTopicoPorId(@PathVariable Long id) {
         return ResponseEntity.ok(topicoService.buscarPorId(id));
+    }
+
+    @GetMapping("{id}/respostas")
+    public ResponseEntity<List<Resposta>> getRespostasPorTopico(@PathVariable Long id) {
+        return ResponseEntity.ok(respostaService.listarRespostasPorTopico(id));
     }
 
     @PostMapping
