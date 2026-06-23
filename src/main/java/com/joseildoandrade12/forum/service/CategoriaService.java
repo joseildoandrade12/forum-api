@@ -2,9 +2,9 @@ package com.joseildoandrade12.forum.service;
 
 import com.joseildoandrade12.forum.model.Categoria;
 import com.joseildoandrade12.forum.repository.CategoriaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -16,22 +16,16 @@ public class CategoriaService {
     }
 
     public Categoria criarCategoria(Categoria categoria) {
-        if (categoria.getNome() == null || categoria.getNome().isEmpty()) {
-            throw new IllegalArgumentException("Nome é um campo obrigatório!");
-        }
-        if (categoria.getDescricao() == null || categoria.getDescricao().isEmpty()) {
-            throw new IllegalArgumentException("Descrição é um campo obrigatório!");
-        }
         return categoriaRepository.save(categoria);
     }
 
     public Categoria buscarPorId(Long id) {
-        return categoriaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada, ID inválido!"));
+        return categoriaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada!"));
     }
 
     public Categoria atualizarCategoria(Long id, Categoria dados) {
         Categoria categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada, ID inválido!"));
+                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada!"));
         categoria.setNome(dados.getNome());
         categoria.setDescricao(dados.getDescricao());
         return categoriaRepository.save(categoria);
@@ -43,7 +37,7 @@ public class CategoriaService {
 
     public void deletarCategoria(Long id) {
         if (!categoriaRepository.existsById(id)) {
-            throw new IllegalArgumentException("Categoria não encontrada, ID inválido!");
+            throw new EntityNotFoundException("Categoria não encontrada!");
         }
         categoriaRepository.findById(id).ifPresent(categoriaRepository::delete);
     }

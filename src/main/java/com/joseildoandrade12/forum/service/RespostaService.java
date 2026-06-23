@@ -3,6 +3,7 @@ package com.joseildoandrade12.forum.service;
 import com.joseildoandrade12.forum.model.Resposta;
 import com.joseildoandrade12.forum.repository.RespostaRepository;
 import com.joseildoandrade12.forum.repository.TopicoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,37 +23,34 @@ public class RespostaService {
     }
 
     public Resposta criarResposta(Resposta resposta) {
-        if (resposta.getMensagem() == null || resposta.getMensagem().isEmpty()) {
-            throw new IllegalArgumentException("Mensagem é um campo obrigatório");
-        }
-        if (!topicoRepository.existsById(resposta.getTopico().getId())) {
-            throw new IllegalArgumentException("Tópico inválido");
+        if (resposta.getTopico() == null || !topicoRepository.existsById(resposta.getTopico().getId())) {
+            throw new EntityNotFoundException("Tópico inválido");
         }
         return respostaRepository.save(resposta);
     }
 
     public Resposta buscarPorId(Long id) {
-        return respostaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resposta não encontrada, id inválido!"));
+        return respostaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Resposta não encontrada!"));
     }
 
     public Resposta atualizarResposta(Long id, Resposta dados) {
-        Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resposta não encontrada, id inválido!"));
+        Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Resposta não encontrada!"));
         resposta.setMensagem(dados.getMensagem());
         if (!topicoRepository.existsById(dados.getTopico().getId())) {
-            throw new IllegalArgumentException("Tópico não encontrado, id inválido!");
+            throw new EntityNotFoundException("Tópico não encontrado!");
         }
         resposta.setTopico(dados.getTopico());
         return respostaRepository.save(resposta);
     }
 
     public void deletarResposta(Long id) {
-        Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resposta não encontrada, id inválido!"));
+        Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Resposta não encontrada!"));
         respostaRepository.delete(resposta);
     }
 
     public List<Resposta> listarRespostasPorTopico(Long id) {
         if (!topicoRepository.existsById(id)) {
-            throw new IllegalArgumentException("Tópico não encontrado, id inválido!");
+            throw new EntityNotFoundException("Tópico não encontrado!");
         }
         return respostaRepository.findByTopico_Id(id);
     }
