@@ -1,25 +1,22 @@
 package com.joseildoandrade12.forum.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-@Table(name = "respostas")
+@Table(name = "usuarios")
 @Entity
-public class Resposta {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String mensagem;
-    private LocalDateTime dataCriacao = LocalDateTime.now();
-
-    @ManyToOne
-    @JoinColumn(name = "topico_id")
-    private Topico topico;
+    private String nome;
+    @Column(unique = true)
+    private String email;
+    private String senha;
 }
