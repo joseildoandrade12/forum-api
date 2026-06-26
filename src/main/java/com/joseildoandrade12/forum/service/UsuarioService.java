@@ -6,26 +6,25 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class UserDetailsService {
+public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-    public UserDetailsService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
     public Usuario criarUsuario(Usuario usuario) {
+        if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email já cadastrado!");
+        }
         String encode = new BCryptPasswordEncoder().encode(usuario.getSenha());
         usuario.setSenha(encode);
         return usuarioRepository.save(usuario);
     }
 
-    public void buscarUsuarioPorEmail(String email) {
-        Optional<Usuario> byEmail = usuarioRepository.findByEmail(email);
-        if (byEmail.isPresent()) {
-            throw new EntityNotFoundException("Email inválido!");
-        }
+    public Usuario buscarUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado!"));
     }
 }
