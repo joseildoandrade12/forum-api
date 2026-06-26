@@ -31,7 +31,7 @@ API REST de um fórum simples, desenvolvida em Java com Spring Boot e PostgreSQL
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU-USUARIO/forum-api.git
+git clone https://github.com/joseildoandrade12/forum-api.git
 cd forum-api
 
 # Configure o banco de dados no application.properties
