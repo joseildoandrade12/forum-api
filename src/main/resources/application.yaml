@@ -4,7 +4,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
   datasource:
     url: 'jdbc:postgresql://localhost:5432/forum_db'
     username: 'postgres'
     password: '1206'
+
+api:
+  security:
+    token:
+      secret: minha-chave-secreta-super-longa-aqui-2024
