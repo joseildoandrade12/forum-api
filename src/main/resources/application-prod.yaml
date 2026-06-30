@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: postgresql://neondb_owner:npg_QD6BYcKUh1PH@ep-falling-darkness-ac12fths.sa-east-1.aws.neon.tech/neondb?sslmode=require
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false

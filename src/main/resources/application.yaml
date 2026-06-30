@@ -3,14 +3,20 @@ spring:
     name: forum
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
   datasource:
     url: 'jdbc:postgresql://localhost:5432/forum_db'
     username: 'postgres'
-    password: '1206'
+    password: ${DB_PASSWORD}
 
 api:
   security:
     token:
-      secret: minha-chave-secreta-super-longa-aqui-2024
+      secret: ${JWT_SECRET}
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
