@@ -23,4 +23,8 @@ public class Topico {
     @ManyToOne // Assossiação N:1
     @JoinColumn(name = "categoria_id") // Chave estrangeira
     private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario autor;
 }

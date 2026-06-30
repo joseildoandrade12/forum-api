@@ -22,4 +22,8 @@ public class Resposta {
     @ManyToOne
     @JoinColumn(name = "topico_id")
     private Topico topico;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario autor;
 }
