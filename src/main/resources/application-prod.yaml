@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: postgresql://neondb_owner:npg_QD6BYcKUh1PH@ep-falling-darkness-ac12fths.sa-east-1.aws.neon.tech/neondb?sslmode=require
-    username: ${DB_USERNAME}
+    url: jdbc:postgresql://db.cnvhasxxvhsscrswklpg.supabase.co:5432/postgres
+    username: postgres
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
